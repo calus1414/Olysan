@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+	<h1>Tous les Produit</h1>
+	<nav>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link active" href="{{path("show_product")}}">Tous les Produits</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('product_form')}}">Nouveau produit</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('category')}}">Catégorie</a>
+			</li>
+		</ul>
+
+	</nav>
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{message}}</div>
+	{% endfor %}
+	<table class="table table-success table-striped">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+
+				<th scope="col">Nom</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Categorie</th>
+				<th scope="col">#</th>
+				<th scope="col">#</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for product in products %}
+
+
+				<tr>
+					<th scope="row">{{product.id}}</th>
+					<td>{{product.name}}</td>
+					<td>{{product.price}}</td>
+					{% for category in categorys %}
+						{% if product.category.id == category.id %}
+							<td>{{category.name}}</td>
+						{% endif %}
+
+					{% endfor %}
+					<td>
+						<a class="btn btn-warning" href="{{path("update_product",{id:product.id})}}">Modifier</a>
+					</td>
+					<td>
+
+						<a class="btn btn-danger" data-bs-toggle="modal" href='#exampleModalToggle{{product.id}}' role="button">Supprimer</a>
+
+					</td>
+
+
+				</tr>
+				<div class="modal fade " id="exampleModalToggle{{product.id}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<p class='text-primary'>Cliquer sur Confirmer pour supprimer le produit
+									<span class='text-warning'>{{product.name}}</span>
+
+								</p>
+							</div>
+							<div class="modal-footer">
+								<a class="btn btn-danger" href="{{path("delete_product",{id:product.id})}}">Confirmer</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+
+			{% endfor %}
+
+		</tbody>
+	</table>
+
+
+{% endblock %}

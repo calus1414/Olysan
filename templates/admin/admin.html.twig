@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<h1>Admin</h1>
+	<nav>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link active" href="{{path("show_product")}}">Tous les Produits</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('product_form')}}">Nouveau produit</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('category')}}">Catégorie</a>
+			</li>
+		</ul>
+
+	</nav>
+
+{% endblock %}

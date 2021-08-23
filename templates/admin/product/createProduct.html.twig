@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+	<h1>Form</h1>
+	<nav>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link active" href="{{path("show_product")}}">Tous les Produits</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('product_form')}}">Nouveau produit</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" href="{{path('category')}}">Catégorie</a>
+			</li>
+		</ul>
+
+	</nav>
+	{{ form_start(form) }}
+	<div class="row  m-5">
+		<div class="col-md-7">{{ form_row(form.name) }}</div>
+		<div class="col-md-6">{{ form_row(form.price) }}</div>
+		<div class="col-md-6">{{ form_row(form.category) }}</div>
+		<div class="col-md-12">{{ form_row(form.description) }}</div>
+
+		<input type="submit" class='btn  btn-primary' value='Créer'>
+	</div>
+
+	{{ form_end(form) }}
+{% endblock %}
